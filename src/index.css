@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Pangram:wght@200;300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #928466;
+  --background: #000000;
+  --text: #ffffff;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text);
+  font-family: 'Pangram', sans-serif;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, .display-text {
+  font-family: 'Pangram', sans-serif;
+  font-weight: 200;
+  letter-spacing: 0.02em;
+}
+
+.gradient-text {
+  background: linear-gradient(45deg, var(--primary), #ffffff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 30px rgba(146, 132, 102, 0.3);
+}
+
+.nav-blur {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(146, 132, 102, 0.1);
+}
+
+.synthesis-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  overflow: hidden;
+}
+
+.synthesis-field {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(
+      circle 800px at var(--mouse-x) var(--mouse-y),
+      rgba(146, 132, 102, 0.15),
+      transparent 70%
+    );
+  opacity: 0.5;
+  mix-blend-mode: screen;
+  filter: blur(20px);
+  transform: translateZ(20px);
+}
+
+.synthesis-crystal {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 100px,
+    rgba(146, 132, 102, 0.03) 100px,
+    rgba(146, 132, 102, 0.03) 200px
+  );
+  transform-style: preserve-3d;
+  transform: 
+    perspective(1000px)
+    rotateX(calc(var(--scroll-progress) * 20deg))
+    translateZ(calc(var(--scroll-progress) * 100px));
+}
+
+.service-card {
+  border: 1px solid rgba(146, 132, 102, 0.1);
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, transparent, rgba(146, 132, 102, 0.1), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s;
+}
+
+.service-card:hover::before {
+  transform: translateX(100%);
+}
+
+.service-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(146, 132, 102, 0.1);
+}
